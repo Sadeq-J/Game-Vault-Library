@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Platform</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-pen-to-square"></i> Update platform</p>
+                <h1>Edit platform details.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/platforms/<%= platform._id %>?_method=PUT" method="POST">
+                <label class="field" for="name">
+                    <span>Name</span>
+                    <input type="text" id="name" name="name" value="<%= platform.name %>" required>
+                </label>
+                <label class="field" for="manufacturer">
+                    <span>Manufacturer</span>
+                    <select id="manufacturer" name="manufacturer">
+                        <% companies.forEach(company => { %>
+                            <option value="<%= company._id %>" <%= platform.manufacturer && platform.manufacturer.equals(company._id) ? 'selected' : '' %>><%= company.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+                <label class="field" for="logo">
+                    <span>Logo URL</span>
+                    <input type="text" id="logo" name="logo" value="<%= platform.logo %>">
+                </label>
+                <button class="btn btn-primary" type="submit">Update Platform</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

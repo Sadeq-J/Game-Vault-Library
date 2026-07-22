@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platforms</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Admin catalog</p>
+                    <h2>Platforms</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% platforms.forEach(platform => { %>
+                    <article class="content-card admin-card">
+                        <img src="<%= platform.logo %>" alt="<%= platform.name %> logo" style="height: 140px; object-fit: contain; border-radius: 14px; background: rgba(255,255,255,0.04); padding: 1rem; margin-bottom: 1rem;">
+                        <h3><%= platform.name %></h3>
+                        <p>Manufacturer: <%= platform.manufacturer ? platform.manufacturer.name : 'N/A' %></p>
+                        <div class="stacked-actions" style="margin-top: 1rem;">
+                            <form action="/admin/platforms/<%= platform._id %>/edit" method="GET">
+                                <button class="btn btn-secondary" type="submit">Edit</button>
+                            </form>
+                            <form action="/admin/platforms/<%= platform._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this platform?');">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
