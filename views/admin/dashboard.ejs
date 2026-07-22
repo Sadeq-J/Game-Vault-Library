@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Control center</p>
+                    <h2>Admin dashboard</h2>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <h3><i class="fa-solid fa-users"></i> Users</h3>
+                    <p class="stat-value"><%= users.length %></p>
+                    <form action="/admin/users" method="GET">
+                        <button class="btn btn-secondary" type="submit">View Users</button>
+                    </form>
+                </article>
+
+                <article class="stat-card">
+                    <h3><i class="fa-solid fa-gamepad"></i> Games</h3>
+                    <p class="stat-value"><%= games.length %></p>
+                    <div class="stacked-actions">
+                        <form action="/admin/games" method="GET">
+                            <button class="btn btn-secondary" type="submit">View Games</button>
+                        </form>
+                        <form action="/admin/games/new" method="GET">
+                            <button class="btn btn-primary" type="submit">Add New Game</button>
+                        </form>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <h3><i class="fa-solid fa-building"></i> Companies</h3>
+                    <p class="stat-value"><%= companies.length %></p>
+                    <div class="stacked-actions">
+                        <form action="/admin/companies" method="GET">
+                            <button class="btn btn-secondary" type="submit">View Companies</button>
+                        </form>
+                        <form action="/admin/companies/new" method="GET">
+                            <button class="btn btn-primary" type="submit">Add New Company</button>
+                        </form>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <h3><i class="fa-solid fa-cubes"></i> Platforms</h3>
+                    <p class="stat-value"><%= platforms.length %></p>
+                    <div class="stacked-actions">
+                        <form action="/admin/platforms" method="GET">
+                            <button class="btn btn-secondary" type="submit">View Platforms</button>
+                        </form>
+                        <form action="/admin/platforms/new" method="GET">
+                            <button class="btn btn-primary" type="submit">Add New Platform</button>
+                        </form>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <h3><i class="fa-solid fa-tags"></i> Genres</h3>
+                    <p class="stat-value"><%= genres.length %></p>
+                    <div class="stacked-actions">
+                        <form action="/admin/genres" method="GET">
+                            <button class="btn btn-secondary" type="submit">View Genres</button>
+                        </form>
+                        <form action="/admin/genres/new" method="GET">
+                            <button class="btn btn-primary" type="submit">Add New Genre</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
