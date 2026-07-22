@@ -1,13 +1,67 @@
-<nav>
-    
-    <a href="/">Homepage</a>
-    <% if (user){ %>
-    <a href="/auth/sign-out">Logout</a>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <% } else{ %>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">Login</a>
+<% 
+  const navGenres = Array.isArray(genre) ? genre : (genre ? [genre] : []);
+  const navPlatforms = Array.isArray(platforms) ? platforms : (platforms ? [platforms] : []);
+%>
 
-    <% } %>
-    
+<nav class="navbar">
+    <a class="brand" href="/">
+        <span class="brand-mark"><i class="fa-solid fa-gamepad"></i></span>
+        <span class="brand-text">
+            <strong>GameVault</strong>
+            <small>Library</small>
+        </span>
+    </a>
+
+    <div class="nav-links">
+        <a class="nav-link active" href="/"><i class="fa-solid fa-house"></i> Home</a>
+
+        <div class="dropdown">
+            <a class="nav-link" href="/games"><i class="fa-solid fa-bolt"></i> Games</a>
+
+            <div class="mega-menu">
+                <div class="column">
+                    <h3><a href="/genres">Genres</a></h3>
+                    <% navGenres.forEach(oneGenre => { %>
+                        <a href="/genres/<%= oneGenre._id %>"><%= oneGenre.name %></a>
+                    <% }) %>
+                </div>
+                <div class="column">
+                    <h3><a href="/platforms">Platforms</a></h3>
+                    <% for(let platform of navPlatforms){ %>
+                        <a href="/<%= platform._id %>"><%= platform.name %></a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <a class="nav-link" href="/companies"><i class="fa-solid fa-building"></i> Companies</a>
+        <a class="nav-link" href="/library"><i class="fa-solid fa-bookmark"></i> Library</a>
+        <% if (user && user.isAdmin) { %>
+            <a class="nav-link" href="/admin"><i class="fa-solid fa-shield-halved"></i> Admin</a>
+        <% } %>
+    </div>
+
+    <div class="nav-actions">
+        <form class="nav-search" action="/games" method="GET">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search games">
+        </form>
+
+        <% if (user){ %>
+            <a class="nav-user" href="/library">
+                <span class="avatar"><%= user.username?.charAt(0).toUpperCase() %></span>
+                <span><%= user.username %></span>
+            </a>
+            <a class="btn btn-secondary btn-small" href="/auth/sign-out">Logout</a>
+        <% } else{ %>
+            <a class="btn btn-secondary btn-small" href="/auth/sign-in">Login</a>
+            <a class="btn btn-primary btn-small" href="/auth/sign-up">Sign up</a>
+        <% } %>
+    </div>
 </nav>
