@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Library catalog</p>
+                    <h2>Browse every title</h2>
+                </div>
+                <a class="text-link" href="/">Back home <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card-grid">
+                <% games.forEach(game => { %>
+                    <article class="game-card" onclick="window.location.href='/games/<%= game._id %>'">
+                        <img src="<%= game.coverImage %>" alt="<%= game.title %> cover">
+                        <div class="game-card-content">
+                            <div class="game-meta">
+                                <span class="badge">Featured</span>
+                                <span class="badge"><%= game.releaseDate ? new Date(game.releaseDate).getFullYear() : 'TBA' %></span>
+                            </div>
+                            <h3><%= game.title %></h3>
+                            <p><%= game.description %></p>
+                            <div class="card-actions">
+                                <a class="btn btn-primary btn-small" href="/games/<%= game._id %>">View details</a>
+                                <a class="btn btn-secondary btn-small" href="/library">Add to library</a>
+                            </div>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

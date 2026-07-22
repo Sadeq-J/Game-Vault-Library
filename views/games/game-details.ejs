@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell detail-shell">
+        <section class="detail-hero">
+            <img src="<%= game.coverImage %>" alt="<%= game.title %> cover">
+            <div class="detail-hero-overlay"></div>
+            <div class="detail-hero-content">
+                <p class="eyebrow"><i class="fa-solid fa-star"></i> Premium selection</p>
+                <h1><%= game.title %></h1>
+                <p><%= game.description %></p>
+            </div>
+        </section>
+
+        <section class="detail-layout">
+            <div class="content-card detail-main">
+                <div class="detail-meta-row">
+                    <div class="detail-meta-pill"><i class="fa-solid fa-calendar"></i> Release <span><%= game.releaseDate %></span></div>
+                    <div class="detail-meta-pill"><i class="fa-solid fa-building"></i> Publisher <span><%= game.company?.name %></span></div>
+                    <div class="detail-meta-pill"><i class="fa-solid fa-star"></i> Rating <span>4.8/5</span></div>
+                </div>
+
+                <div class="detail-block">
+                    <h3>Overview</h3>
+                    <p><%= game.description %></p>
+                </div>
+
+                <div class="detail-block">
+                    <h3>Platforms & genres</h3>
+                    <div class="chip-row">
+                        <% game.platform.forEach(onePlatform => { %>
+                            <span class="chip"><%= onePlatform.name %></span>
+                        <% }) %>
+                        <% game.genre.forEach(oneGenre => { %>
+                            <span class="chip"><%= oneGenre.name %></span>
+                        <% }) %>
+                    </div>
+                </div>
+
+                <div class="detail-block">
+                    <h3>Your library</h3>
+                    <% if (!library) { %>
+                        <form class="stacked-form" action="/library/<%= game._id %>" method="POST">
+                            <label class="field">
+                                <span>Status</span>
+                                <select name="status" id="status">
+                                    <option value="Wishlist">Wishlist</option>
+                                    <option value="Playing">Playing</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </label>
+                            <button class="btn btn-primary" type="submit">Add to Library</button>
+                        </form>
+                    <% } else { %>
+                        <form class="stacked-form" action="/library/<%= game._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger" type="submit">Remove from Library</button>
+                        </form>
+
+                        <form class="stacked-form" action="/library/<%= game._id %>?_method=PUT" method="POST">
+                            <label class="field">
+                                <span>Status</span>
+                                <select name="status" id="status">
+                                    <option value="Wishlist">Wishlist</option>
+                                    <option value="Playing">Playing</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </label>
+                            <button class="btn btn-secondary" type="submit">Update Status</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+
+            <aside class="content-card detail-side">
+                <h3>Reviews</h3>
+                <% game.reviews.forEach(oneReview => { %>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong><%= oneReview.createdBy?.username %></strong>
+                            <span><%= oneReview.star %>/5</span>
+                        </div>
+                        <p><%= oneReview.reviewBody %></p>
+                    </div>
+                <% }) %>
+
+                <form class="stacked-form" action="/games/<%= game._id %>/review" method="post">
+                    <h4>Leave a Review</h4>
+                    <label class="field">
+                        <span>Review</span>
+                        <input name="reviewBody" id="reviewBody" type="text">
+                    </label>
+
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="star" value="5" />
+                        <label for="star5" title="5 stars">★</label>
+                        <input type="radio" id="star4" name="star" value="4" />
+                        <label for="star4" title="4 stars">★</label>
+                        <input type="radio" id="star3" name="star" value="3" />
+                        <label for="star3" title="3 stars">★</label>
+                        <input type="radio" id="star2" name="star" value="2" />
+                        <label for="star2" title="2 stars">★</label>
+                        <input type="radio" id="star1" name="star" value="1" />
+                        <label for="star1" title="1 stars">★</label>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>
