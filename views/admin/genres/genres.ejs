@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Content management</p>
+                    <h2>Genre library</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% genres.forEach(oneGenre => { %>
+                    <article class="content-card admin-card">
+                        <h3><%= oneGenre.name %></h3>
+                        <p><%= oneGenre.description %></p>
+                        <div class="stacked-actions">
+                            <form action="/admin/genres/<%= oneGenre._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                            <form action="/admin/genres/<%= oneGenre._id %>/edit" method="GET">
+                                <button class="btn btn-secondary" type="submit">Edit</button>
+                            </form>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

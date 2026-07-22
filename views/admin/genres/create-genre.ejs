@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Genre</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-plus"></i> New genre</p>
+                <h1>Create a genre entry.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/genres" method="POST">
+                <label class="field" for="name">
+                    <span>Name</span>
+                    <input type="text" id="name" name="name" required>
+                </label>
+                <label class="field" for="description">
+                    <span>Description</span>
+                    <textarea id="description" name="description" required></textarea>
+                </label>
+                <button class="btn btn-primary" type="submit">Create Genre</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

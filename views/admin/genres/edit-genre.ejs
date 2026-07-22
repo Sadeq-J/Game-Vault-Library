@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= genre.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-pen-to-square"></i> Update genre</p>
+                <h1>Edit genre details.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/genres/<%= genre._id %>?_method=PUT" method="POST">
+                <label class="field" for="name">
+                    <span>Name</span>
+                    <input type="text" id="name" name="name" value="<%= genre.name %>" required>
+                </label>
+                <label class="field" for="description">
+                    <span>Description</span>
+                    <textarea id="description" name="description"><%= genre.description %></textarea>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Update Genre</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
