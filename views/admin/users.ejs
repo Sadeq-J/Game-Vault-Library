@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Users</title>
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Admin control</p>
+                    <h2>Users</h2>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <% for(user of users) { %>
+                    <article class="content-card admin-card">
+                        <h3><%= user.username %></h3>
+                        <div class="stacked-actions">
+                            <form action="/admin/users/<%= user._id %>?_method=PUT" method="POST">
+                                <label class="switch">
+                                    <input type="checkbox" name="isAdmin" onchange="this.form.submit()" <%=user.isAdmin ? "checked" : ""%>>
+                                    <span class="slider round"></span>
+                                </label>
+                            </form>
+
+                            <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger" type="submit">Delete User</button>
+                            </form>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
