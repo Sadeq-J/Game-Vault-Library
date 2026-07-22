@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Browse by vibe</p>
+                    <h2>Game genres</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% genre.forEach(oneGenre => { %>
+                    <article class="game-card" onclick="location.href='/genres/<%= oneGenre._id %>'">
+                        <div class="game-card-content">
+                            <h3><%= oneGenre.name %></h3>
+                            <p><%= oneGenre.description %></p>
+                            <a class="btn btn-primary btn-small" href="/genres/<%= oneGenre._id %>">Explore</a>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
