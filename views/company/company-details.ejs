@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= company.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="content-card detail-card">
+            <div class="company-hero">
+                <img src="<%= company.logo %>" alt="<%= company.name %>">
+                <div>
+                    <p class="eyebrow"><i class="fa-solid fa-building"></i> Publisher profile</p>
+                    <h1><%= company.name %></h1>
+                    <p><%= company.description %></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Studio catalog</p>
+                    <h2><%= company.name %> games</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% games.forEach(oneGame => { %>
+                    <article class="game-card" onclick="location.href='/games/<%= oneGame._id %>'">
+                        <img src="<%= oneGame.coverImage %>" alt="<%= oneGame.title %>">
+                        <div class="game-card-content">
+                            <h3><%= oneGame.title %></h3>
+                            <a class="btn btn-primary btn-small" href="/games/<%= oneGame._id %>">See details</a>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

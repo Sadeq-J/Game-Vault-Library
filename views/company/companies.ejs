@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Studios</p>
+                    <h2>Publisher spotlight</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% company.forEach(oneCompany => { %>
+                    <article class="game-card company-card" onclick="window.location.href='/companies/<%= oneCompany._id %>'">
+                        <img src="<%= oneCompany.logo %>" alt="<%= oneCompany.name %>">
+                        <div class="game-card-content">
+                            <h3><%= oneCompany.name %></h3>
+                            <p><%= oneCompany.description %></p>
+                            <a class="btn btn-secondary btn-small" href="/companies/<%= oneCompany._id %>">View studio</a>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
