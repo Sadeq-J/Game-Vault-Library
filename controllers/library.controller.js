@@ -3,10 +3,12 @@ const router = require('express').Router()
 const Library = require('../models/Library')
 const Game = require('../models/Game')
 
+// middleware
+const isSignedIn = require('../middleware/is-signed-in')
 
 
 
-router.get('/', async(req, res) => {
+router.get('/', isSignedIn,async(req, res) => {
     try {
         const library = await Library.find({user: req.session.user._id}).populate('game')
         res.render('library/library.ejs', {library})
@@ -16,7 +18,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/:id', async(req, res) => {
+router.post('/:id', isSignedIn,async(req, res) => {
     try {
         const foundedGame = await Library.findOne({user: req.session.user._id, game: req.params.id})
         if(!foundedGame){
@@ -34,7 +36,7 @@ router.post('/:id', async(req, res) => {
     }
 })
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', isSignedIn,async(req, res) => {
     try {
         const user = req.session.user._id
         const game = req.params.id

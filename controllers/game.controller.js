@@ -22,21 +22,22 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', isSignedIn,async(req, res) => {
     try {
+        console.log('iN route')
         const library = await Library.findOne({user: req.session.user._id, game: req.params.id})
         const game = await Game.findById(req.params.id).populate('company genre platform reviews').populate({path:'reviews',
             populate: {path: 'createdBy'}
         })
         res.render('games/game-details.ejs', {game, library})
     } catch (err) {
-        console.log(err)
+        console.log('EER',err)
         res.status(500).send('Server Error')
     }
 })
 
 
-router.post('/:id/review', async(req, res) => {
+router.post('/:id/review', isSignedIn,async(req, res) => {
     try {
         req.body.star = Number(req.body.star)
         
