@@ -5,7 +5,7 @@ const Company = require('../models/Company')
 const Game = require('../models/Game')
 const Genre = require('../models/Genre')
 const Platform = require('../models/Platform')
-const User = require("../models/user.js")
+const User = require("../models/User.js")
 
 // Middleware
 const isSignedIn = require('../middleware/is-signed-in.js')
