@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Your collection</p>
+                    <h2>Library overview</h2>
+                </div>
+            </div>
+
+            <% if (library.length === 0) { %>
+                <div class="content-card empty-state">
+                    <h3>Your library is empty.</h3>
+                    <p>Start exploring and add a few favorites to keep your collection close at hand.</p>
+                    <a class="btn btn-primary" href="/games">Discover games</a>
+                </div>
+            <% } else { %>
+                <div class="card-grid">
+                    <% library.forEach(item => { %>
+                        <article class="game-card" onclick="window.location.href='/games/<%= item.game._id %>'">
+                            <img src="<%= item.game.coverImage %>" alt="<%= item.game.title %> cover">
+                            <div class="game-card-content">
+                                <div class="game-meta">
+                                    <span class="badge"><%= item.status %></span>
+                                </div>
+                                <h3><%= item.game.title %></h3>
+                                <form action="/library/<%= item.game._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger btn-small" type="submit">Remove</button>
+                                </form>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            <% } %>
+        </section>
+    </main>
+</body>
+</html>
