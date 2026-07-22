@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-pen-to-square"></i> Update release</p>
+                <h1>Edit game details.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/games/<%= game._id %>?_method=PUT" method="POST">
+                <label class="field">
+                    <span>Title</span>
+                    <input type="text" name="title" value="<%= game.title %>">
+                </label>
+                <label class="field">
+                    <span>Release Date</span>
+                    <input type="text" name="releaseDate" value="<%= game.releaseDate %>">
+                </label>
+                <label class="field">
+                    <span>Description</span>
+                    <textarea name="description"><%= game.description %></textarea>
+                </label>
+                <label class="field" for="company">
+                    <span>Company</span>
+                    <select name="company" id="company">
+                        <% companies.forEach(company => { %>
+                            <option value="<%= company._id %>" <%= game.company && game.company._id.toString() === company._id.toString() ? 'selected' : '' %>><%= company.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+                <label class="field" for="genre">
+                    <span>Genre</span>
+                    <select name="genre" id="genre" multiple>
+                        <% genres.forEach(genre => { %>
+                            <option value="<%= genre._id %>" <%= game.genre.some(g => g._id.toString() === genre._id.toString()) ? 'selected' : '' %>><%= genre.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+                <label class="field" for="platform">
+                    <span>Platform</span>
+                    <select name="platform" id="platform" multiple>
+                        <% platforms.forEach(platform => { %>
+                            <option value="<%= platform._id %>" <%= game.platform.some(p => p._id.toString() === platform._id.toString()) ? 'selected' : '' %>><%= platform.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+                <button class="btn btn-primary" type="submit">Update Game</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

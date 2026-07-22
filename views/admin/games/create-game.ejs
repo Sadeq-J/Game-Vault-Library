@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Game</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-plus"></i> Add a new release</p>
+                <h1>Create a new game entry.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/games" method="POST">
+                <label class="field">
+                    <span>Title</span>
+                    <input type="text" id="title" name="title" required>
+                </label>
+
+                <label class="field">
+                    <span>Description</span>
+                    <textarea id="description" name="description" required></textarea>
+                </label>
+
+                <label class="field">
+                    <span>Release Date</span>
+                    <input type="date" id="releaseDate" name="releaseDate" required>
+                </label>
+
+                <label class="field">
+                    <span>Company</span>
+                    <select id="company" name="company" required>
+                        <% companies.forEach(company => { %>
+                            <option value="<%= company._id %>"><%= company.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span>Platforms</span>
+                    <select id="platforms" name="platforms" multiple required>
+                        <% platforms.forEach(platform => { %>
+                            <option value="<%= platform._id %>"><%= platform.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span>Genres</span>
+                    <select id="genres" name="genres" multiple required>
+                        <% genres.forEach(genre => { %>
+                            <option value="<%= genre._id %>"><%= genre.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span>Cover Image URL</span>
+                    <input type="text" id="coverImage" name="coverImage">
+                </label>
+
+                <button class="btn btn-primary" type="submit">Create Game</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Games</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell">
+        <section class="section-block">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Manage library</p>
+                    <h2>Admin game catalog</h2>
+                </div>
+            </div>
+            <div class="card-grid">
+                <% games.forEach(game => { %>
+                    <article class="game-card" onclick="window.location.href='/admin/games/<%= game._id %>'">
+                        <img src="<%= game.coverImage %>" alt="<%= game.title %> cover">
+                        <div class="game-card-content">
+                            <h3><%= game.title %></h3>
+                            <div class="card-actions">
+                                <a class="btn btn-primary btn-small" href="/admin/games/<%= game._id %>">View</a>
+                            </div>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
