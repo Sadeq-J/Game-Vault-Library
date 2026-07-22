@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= company.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../../partials/navbar') %>
+
+    <main class="page-shell auth-shell">
+        <section class="form-panel">
+            <div class="form-heading">
+                <p class="eyebrow"><i class="fa-solid fa-pen-to-square"></i> Update studio</p>
+                <h1>Edit company details.</h1>
+            </div>
+            <form class="stacked-form" action="/admin/companies/<%= company._id %>?_method=PUT" method="POST">
+                <label class="field" for="name">
+                    <span>Name</span>
+                    <input type="text" id="name" name="name" value="<%= company.name %>" required>
+                </label>
+                <label class="field" for="country">
+                    <span>Country</span>
+                    <input type="text" id="country" name="country" value="<%= company.country %>">
+                </label>
+                <label class="field" for="logo">
+                    <span>Logo URL</span>
+                    <input type="text" id="logo" name="logo" value="<%= company.logo %>">
+                </label>
+                <label class="field" for="description">
+                    <span>Description</span>
+                    <textarea id="description" name="description"><%= company.description %></textarea>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Update Company</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
